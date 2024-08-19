@@ -1,0 +1,76 @@
+﻿@model HagagCompany.Entities.Job;
+@{
+    var job = Model;
+}
+<head>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <style>
+        .modal-backdrop-blur {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1040;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+    </style>
+</head>
+<div class="modal fade" id="DetailsJob-@job.JobId" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="DetailsJobLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered ">
+        <div class="modal-content">
+            <div class="modal-header text-bg-dark shadow ">
+                <h1 class="modal-title fs-5" id="DetailsJobLabel">Job Details</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+            </div>
+            <div class="modal-title">
+                <table class="table table-bordered mb-0">
+
+                    <tbody>
+                        <tr>
+                            <th scope="row">ID</th>
+                            <td>@job.JobId</td>
+
+                        </tr>
+                        <tr>
+                            <th scope="row">Job ID</th>
+                            <td>@job.JobId</td>
+
+                        </tr>
+                        <tr>
+                            <th scope="row">Job Name</th>
+                            <td colspan="2">@job.JobName</td>
+                        </tr>                      
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <a data-bs-toggle="modal" data-bs-target="@("#EditJob-" + job.JobId)" data-url="@Url.Action($"Edit/{job.JobId}")">
+                    <button type="button" class="btn btn-warning">
+                        Edit Details
+                    </button>
+                </a>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+        $(document).ready(function () {
+        $('#DetailsJob-@job.JobId').on('show.bs.modal', function (e) {
+                $('body').append('<div class="modal-backdrop modal-backdrop-blur"></div>');
+            });
+
+        $('#DetailsJob-@job.JobId').on('hidden.bs.modal', function (e) {
+            $('.modal-backdrop-blur').remove();
+            });
+        });
+
+
+</script>

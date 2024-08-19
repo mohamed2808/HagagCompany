@@ -1,0 +1,58 @@
+﻿@model HagagCompany.Entities.Job;
+@{
+    var job = Model;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Job</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <style>
+        .modal-backdrop-blur {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1040;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+
+        }
+    </style>
+</head>
+<body>
+    <div class="modal fade " id="_DeleteJobPartial-@job.JobId" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+         aria-labelledby="DeleteJobLable" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="DeleteJobLable">Do you want to delete</h5>
+                    <h4 class="modal-title" id="DeleteJobLable"> "@job.JobName" ?</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="border-0 m-3 text-center">
+                    <form onclick="confirmDelete" asp-action="delete" method="post">
+                        <input type="hidden" value="@job.JobId" name="id" />
+                        <button type="submit" class="btn btn-danger">Yes</button>
+                        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Nope, Go back</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('#_DeleteJobPartial-@job.JobId').on('show.bs.modal', function (e) {
+                $('body').append('<div class="modal-backdrop modal-backdrop-blur"></div>');
+            });
+
+            $('#_DeleteJobPartial-@job.JobId').on('hidden.bs.modal', function (e) {
+                $('.modal-backdrop-blur').remove();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+          integrity="sha256-2TnSHycBDAm2wpZmgdi0z81kykGPJAkiUY+Wf97RbvY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body class="bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+
+            <div class="col-md-4">
+                <div class="shadow-lg  mb-5 bg-body rounded">
+                    <!-- #region header -->
+                    <div class="card mt-5">
+                        <div class="card-header text-bg-primary">
+                            Login as admin
+                        </div>
+                        <!-- #endregion header -->
+
+                        <div class="card-body">
+                            <form asp-action="index" method="post">
+                                <!--#region UserName -->
+                                <div class="form-floating mb-3">
+                                    <input type="text" id="UserName" class="form-control" autofocus placeholder="" required="" name="userName">
+                                    <label for="UserName">Username</label>
+                                </div>
+                                <!-- endregion UserName -->
+                                <!--#region Password -->
+                                <div class="form-floating mb-3">
+                                    <input type="password" id="Password" class="form-control" placeholder="" required="" name="password">
+                                    <label for="Password">Password</label>
+                                </div>
+                                <!-- endregion Password -->
+                                <!--#region Checkbox -->
+                                <div class="form-check mb-3">
+                                    <input type="checkbox" class="form-check-input" id="Remember Me">
+                                    <label for="Remember Me">Remember Me</label>
+                                </div>
+                                <!-- endregion Checkbox -->
+                                <!--#region Login Button -->
+                                <div class="d-grid">
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="fa fa-sign-in m-1"></i>Login as admin
+                                    </button>
+                                </div>
+                                <!-- endregion Login Button -->
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+            integrity="sha256-gOQJIa9+K/XdfAuBkg2ONAdw5EnQbokw/s2b8BqsRFg=" crossorigin="anonymous"></script>
+</body>
+
+</html>

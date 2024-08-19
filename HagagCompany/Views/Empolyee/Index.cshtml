@@ -1,0 +1,232 @@
+﻿@model ICollection<HagagCompany.Entities.Employee>
+@{var employees = Model;}
+<head>
+    <title>@ViewData["Title"] - HagagCompany</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/HagagCompany.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="~/css/style.css" rel="stylesheet" />
+</head>
+<body class="bg-light">
+        <div class="wrapper">
+            <div class="content">
+               
+            <nav class="navbar navbar-dark navbar-expand-lg bg-dark shadow sticky-top">
+                <div class="container-fluid">
+                    <a class="custume-brand navbar-brand" asp-controller="Home" asp-action="dash">HAGAG</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Home" asp-action="dash">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" asp-action="index">Employees</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Job" asp-action="index">Jobs</a>
+                            </li>
+
+                        </ul>
+                        <div class="row justify-content-center">
+                            <form class="d-flex" role="search" asp-action="index">
+                                <div class="input-group" style=max-width:20rem;>
+                                    <input name="searchString" type="text" class="form-control" placeholder="Search for..." aria-label="Search for"
+                                           aria-describedby="button-addon2">
+                                    <button class="btn btn-success" type="submit" id="button-addon2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                             class="bi bi-search" viewBox="0 0 16 16">
+                                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                        </svg>
+                                    </button>
+                                    <a asp-action="index">
+                                        <button type="button" class="btn btn-danger m-1 " style="height: 40px">Back</button>
+                                    </a>
+                                </div>
+                        
+                                <a asp-controller="Login" asp-action="index">
+                                    <button class="btn btn-warning btn-sm ms-3" type="button" id="button-addon2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="30" fill="" class="bi bi-power"
+                                             viewBox="0 0 16 16">
+                                            <path d="M7.5 1v7h1V1h-1z" />
+                                            <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z" />
+                                        </svg>
+                                    </button>
+                                </a>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            
+            <div class="supreme-container-fluid mt-3 bg">
+                <div class="row justify-content-center gap-3">
+                    <div class="col-md-2">
+                        <div class="list-group mb-3 text-center shadow">
+                            <a asp-action="index" class="list-group-item list-group-item-action active"
+                               aria-current="true">
+                                Employee Data
+                            </a>
+                            <a data-toggle="modal" onclick="AddEmpolyee()"
+                               class="list-group-item list-group-item-action" asp-action="Create">
+                                Add Employee
+                            </a>
+
+                        </div>
+                        <div class="list-group text-center shadow">
+                            <a asp-controller="job" asp-action="index" class="list-group-item list-group-item-action active"
+                               aria-current="true">
+                                Related Links
+                            </a>
+                            <a asp-controller="job" asp-action="index" class="list-group-item list-group-item-action">Jobs List</a>
+
+                        </div>
+                    </div>
+                
+                    <div class="col-md-8">
+                        <table class="table table-bordered caption-top shadow">
+                            <caption class="text-bg-dark text-center rounded-top bg-dark text-light">Employees List</caption>
+                            <thead class="table-secondary small">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Employee ID</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email ID</th>
+                                    <th scope="col">Details</th>
+                                    <th scope="col">Edit</th>
+                                    <th scope="col">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody class="align-self-center">
+                                @foreach (var empolyee in employees)
+                                {
+                                    <tr>
+                                        <th scope=" row">@empolyee.Number</th>
+                                        <td>@empolyee.EmpolyeeId</td>
+                                        <td>@empolyee.FirstName @empolyee.LastName</td>
+                                        <td>@empolyee.EmailId</td>
+                                        <td>
+
+                                            <a data-bs-toggle="modal" data-bs-target="@("#DetailsEmpolyee-" + empolyee.EmpolyeeId)" data-url="@Url.Action($"Details/{empolyee.EmpolyeeId}")"
+                                               class="btn btn-sm btn-primary d-block">Details</a>
+                                            @await Html.PartialAsync("_DetailsEmpolyeePartialView", empolyee)
+
+
+
+                                        </td>
+                                        <td>
+                                            <a data-bs-toggle="modal" data-bs-target="@("#EditEmpolyee-"+ empolyee.EmpolyeeId)" data-url="@Url.Action($"Edit/{empolyee.EmpolyeeId}")"
+                                               class="btn btn-sm btn-warning d-block">Edit</a>
+                                            @await Html.PartialAsync("_EditEmpolyeePartialView", empolyee)
+                                        </td>
+                                        <td>
+                                            <a data-bs-toggle="modal" data-bs-target="@("#_DeleteEmpolyeePartial-" + empolyee.EmpolyeeId)" data-url="@Url.Action($"delete/{empolyee.EmpolyeeId}")"
+                                               class="btn btn-sm btn-danger d-block">Delete</a>
+                                            @await Html.PartialAsync("_DeleteEmpolyeePartial", empolyee)
+                                        </td>
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <footer class="bg-body-tertiary text-center" style="background-color: #0a4275;">
+                <!-- Grid container -->
+                <div class="container p-4 pb-0">
+                    <!-- Section: Social media -->
+                    <section class="mb-4">
+                        <!-- Facebook -->
+                        <a data-mdb-ripple-init
+                           class="btn text-white btn-floating m-1"
+                           style="background-color: #3b5998;"
+                       href="https://www.facebook.com/profile.php?id=100013377240616&mibextid=ZbWKwL"
+                           role="button">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+
+                        <!-- Twitter -->
+                        <a data-mdb-ripple-init
+                           class="btn text-white btn-floating m-1"
+                           style="background-color: #55acee;"
+                           href="#!"
+                           role="button">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+
+                        <!-- Google -->
+                        <a data-mdb-ripple-init
+                           class="btn text-white btn-floating m-1"
+                           style="background-color: #dd4b39;"
+                           href="https://www.google.com"
+                           role="button">
+                            <i class="fab fa-google"></i>
+                        </a>
+
+                        <!-- Instagram -->
+                        <a data-mdb-ripple-init
+                           class="btn text-white btn-floating m-1"
+                           style="background-color: #ac2bac;"
+                           href="#!"
+                           role="button">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+
+                        <!-- Linkedin -->
+                        <a data-mdb-ripple-init
+                           class="btn text-white btn-floating m-1"
+                           style="background-color: #0082ca;"
+                       href="https://www.linkedin.com/in/mohamed-hagag2004?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                           role="button">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <!-- Github -->
+                        <a data-mdb-ripple-init
+                           class="btn text-white btn-floating m-1"
+                           style="background-color: #333333;"
+                           href="#!"
+                           role="button">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </section>
+                    <!-- Section: Social media -->
+                </div>
+                <!-- Grid container -->
+                <!-- Copyright -->
+            <div class="text-center p-1  text-black" style="background-color: rgba(0.5, 0.5, 0, 0.02);">
+                <a href="https://www.linkedin.com/in/mohamed-hagag2004?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"target="_self" role="button" class="text-white "> © 2024 : Developed By Eng/Mohamed Hagag</a>
+                </div>
+                <!-- Copyright -->
+            </footer>
+        </div>
+  
+
+   
+    <!-- endregion Add Employee Modal -->
+    <cdk-virtual-scroll-viewport [ngClass]="{hidden_scrollbar: hideScrollbar$ | async}">
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+                integrity="sha256-gOQJIa9+K/XdfAuBkg2ONAdw5EnQbokw/s2b8BqsRFg=" crossorigin="anonymous"></script>
+</body>
+<script>
+    function AddEmpolyee() {
+        $.ajax({
+            type: "Get",
+            url: "/Empolyee/Create",
+            success: function (result) {
+                $("#EmpTable").html(result);
+                $("#AddEmpolyee").modal('show');
+            });
+        }
+</script>

@@ -1,0 +1,149 @@
+﻿@model ICollection<HagagCompany.Entities.Employee>;
+
+
+
+@{
+    ViewBag.Title = "Login";
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="../../Bootstap/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+          integrity="sha256-2TnSHycBDAm2wpZmgdi0z81kykGPJAkiUY+Wf97RbvY=" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>dishbord</title>
+    <style>
+        .custume-brand {
+            background: #121FCF;
+            background: linear-gradient(to right, #3642ec 0%, #13CF1F 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+
+
+        .hidden_scrollbar {
+            overflow-y: scroll;
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* Internet Explorer 10+ */
+        }
+
+            .hidden_scrollbar::-webkit-scrollbar {
+                /* WebKit */
+                width: 0;
+                height: 0;
+            }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        .navbar.navbar-nav.nav-link.active,
+        .navbar.navbar-nav.nav-link.foucs,
+        .navbar.navbar-nav.nav-link.havour {
+            color: var(green-color)
+        }
+    </style>
+</head>
+
+<body class="bg-light">
+    <!--#region of navber -->
+    <nav class="navbar navbar-dark navbar-expand-lg bg-dark shadow sticky-top">
+        <div class="container-fluid">
+            <a class="custume-brand navbar-brand" asp-controller="Home" asp-action="dash">HAGAG</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" asp-action="dash">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link "asp-controller="Empolyee" asp-action="index">Employees</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Job" asp-action="index">Jobs</a>
+                    </li>
+
+                </ul>
+                <div class="row justify-content-center">
+                    <form class="d-flex" role="search">
+                        <div class="input-group" style=max-width:20rem;>
+                            <input type="text" class="form-control" placeholder="Search for..." aria-label="Search for"
+                                   aria-describedby="button-addon2">
+                            <button class="btn btn-success" type="button" id="button-addon2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="d-flex text-bg-dark" style="height: 40px;">
+                            <div class="vr ms-3"></div>
+                        </div>
+                        <a asp-controller="Login" asp-action="index">
+                            <button class="btn btn-warning btn-sm ms-3" type="button" id="button-addon2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="16" fill="" class="bi bi-power"
+                                     viewBox="0 0 16 16">
+                                    <path d="M7.5 1v7h1V1h-1z" />
+                                    <path d="M3 8.812a4.999 4.999 0 0 1 2.578-4.375l-.485-.874A6 6 0 1 0 11 3.616l-.501.865A5 5 0 1 1 3 8.812z" />
+                                </svg>
+                            </button>
+                        </a>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- endregion of navber -->
+    <!-- #region of Cards -->
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <div class="card text-bg-primary mt-3 text-center shadow">
+                    <div class="card-header">Employees List</div>
+                    <div class="card-body">
+                        <label class="card-title fs-1">@Model.ToList().Count+</label>
+                    </div>
+                    <div class="card-footer small px-0">
+                        <a class="d-block  text-decoration-none text-white"
+                           asp-controller="Empolyee" asp-action="index">View all employees</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card text-bg-primary mt-3 text-center shadow">
+                    <div class="card-header">Jobs List</div>
+                    <div class="card-body">
+                        <label class="card-title fs-1">5+</label>
+                    </div>
+                    <div class="card-footer small px-0">
+                        <a class="d-block text-decoration-none text-white"
+                           asp-controller="Job" asp-action="index">
+                            View
+                            all Jobs
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- endregion of Cards -->
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js"
+            integrity="sha256-gOQJIa9+K/XdfAuBkg2ONAdw5EnQbokw/s2b8BqsRFg=" crossorigin="anonymous"></script>
+    <!-- <script src="../../Bootstap/js/bootstrap.bundle.js"></script> -->
+</body>
+
+</html>

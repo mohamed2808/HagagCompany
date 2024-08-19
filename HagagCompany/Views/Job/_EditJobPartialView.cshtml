@@ -1,0 +1,86 @@
+﻿@model HagagCompany.Entities.Job
+@{
+    var job = Model;
+}
+<head>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <style>
+        .modal-backdrop-blur {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 1040;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+    </style>
+</head>
+
+<div class="modal fade" id="EditJob-@job.JobId" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="EditJobLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header text-bg-dark">
+                <h1 class="modal-title fs-5" id="EditJobLabel">Job Details</h1>
+                <button type="button" class="btn-close " data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-action="Edit" method="post">
+
+                    <input type="hidden" asp-for="JobId" />
+                    <!-- Date -->
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group mb-3">
+                        <input asp-for="JobId" class="form-control" />
+                        <span asp-validation-for="JobId" class="text-danger" autofocus></span>
+                    </div>
+                    <!-- Name -->
+                    <div class="row justify-content-center">
+                        
+                            <div class="form-group mb-3">
+                                <input asp-for="JobName" class="form-control" />
+                                <span asp-validation-for="JobName" class="text-danger" autofocus></span>
+                            </div>
+                      
+                     </div>
+                    <div class="border-0 mb-3 mt-3">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <a href="">
+                                    <button type="submit" class="input-group btn btn-success">
+                                        Update
+                                        job
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" class=" input-group btn btn-warning"
+                                        data-bs-dismiss="modal">
+                                    Discard
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#EditJob-@job.JobId').on('show.bs.modal', function (e) {
+            $('body').append('<div class="modal-backdrop modal-backdrop-blur"></div>');
+        });
+
+        $('#EditJob-@job.JobId').on('hidden.bs.modal', function (e) {
+            $('.modal-backdrop-blur').remove();
+        });
+    });
+</script>

@@ -1,0 +1,77 @@
+﻿@model HagagCompany.Entities.Job
+
+@{
+    ViewBag.Title = "Create Job";
+}
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/HagagCompany.styles.css" asp-append-version="true" />
+    <link href="d:\projects\hagagcompany\hagagcompany\style\stylesheet.css" rel="stylesheet" />
+
+</head>
+<body class="bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+
+            <div class="col-md-7">
+                <div class="shadow-lg  mb-5 bg-body rounded">
+                    <!-- #region header -->
+                    <div class="card mt-5">
+                        <div class="card-header text-bg-primary">
+                            Create new Job
+                        </div>
+                        <!-- #endregion header -->
+
+                        <div class="card-body">
+                            @using (Html.BeginForm())
+                            {
+
+                                <div class="form-horizontal center-form ">
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.JobId, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.JobId, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.JobId, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(model => model.JobName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => model.JobName, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.JobName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                 </div>
+                                <div class="border-0 mb-4 mt-3">
+                                    <div class="row justify-content-center">
+                                        <div class="col-md-8">
+                                            <a href="">
+                                                <button type="submit" class="input-group btn btn-success">
+                                                    Add
+                                                    Job
+                                                </button>
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4 ">
+                                            <button type="button" value="Create" class=" input-group btn btn-warning"
+                                                    data-bs-dismiss="modal">
+                                                Discard
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                   
+                            }
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+

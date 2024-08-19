@@ -1,0 +1,51 @@
+﻿@model HagagCompany.Entities.Employee;
+@{
+    var empolyee = Model;
+}
+ <head>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <style>
+        body.modal-open .background-container {
+            -webkit-filter: blur(4px);
+            -moz-filter: blur(4px);
+            -o-filter: blur(4px);
+            -ms-filter: blur(4px);
+            filter: blur(4px);
+        
+        }</style>
+ </head>
+
+<div class="modal fade" id="_DeleteEmpolyeePartial-@empolyee.EmpolyeeId" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="DeleteEmpolyeeLable" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="DeleteEmpolyeeLable">Do you want to delete</h5>
+                <h4 class="modal-title" id="DeleteEmpolyeeLable"> "@empolyee.FirstName" ?</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class=" border-0 m-3 text-center">
+                <form onclick="confirmDelete" asp-action="delete" name="id" method="post">
+                    <input type="hidden" value="@empolyee.EmpolyeeId" name="id" />
+                    <a> <button type="submit" class="btn btn-danger" name="id">Yes</button> </a>
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Nope,Go back</button>
+                   
+                </form>
+
+               
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#_DeleteEmpolyeePartial-@empolyee.EmpolyeeId').on('show.bs.modal', function (e) {
+            $('body').append('<div class="modal-backdrop modal-backdrop-blur"></div>');
+        });
+
+        $('#_DeleteEmpolyeePartial-@empolyee.EmpolyeeId').on('hidden.bs.modal', function (e) {
+            $('.modal-backdrop-blur').remove();
+        });
+    });
+</script>
+
